@@ -11,13 +11,20 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="/assets/plugins/fontawesome-free/css/all.min.css">
+    <!-- Font Awesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/assets/dist/css/adminlte.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
+
+    @include('sweetalert::alert')
+
     <div class="wrapper">
 
         <!-- Navbar -->
@@ -29,10 +36,10 @@
                             class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link">Dashboard</a>
+                    <a href="/" class="nav-link">Dashboard</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Barang</a>
+                    <a href="/" class="nav-link">Barang</a>
                 </li>
             </ul>
 
@@ -207,7 +214,7 @@
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
                             <a href="/" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fa-solid fa-gauge-high"></i>
                                 <p>
                                     Dashboard
                                 </p>
@@ -215,7 +222,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="/barang" class="nav-link">
-                                <i class="fas fa-hockey-puck"></i>
+                                <i class="nav-icon fa-solid fa-box"></i>
                                 <p>
                                     Barang
                                 </p>
@@ -263,8 +270,17 @@
     <script src="/assets/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="/assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
     <!-- AdminLTE App -->
     <script src="/assets/dist/js/adminlte.min.js"></script>
+    @include('sweetalert::alert', ['cdn' => 'https://cdn.jsdelivr.net/npm/sweetalert2@9'])
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         $(function() {
@@ -285,6 +301,36 @@
                 .addClass('active');
         });
     </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#example1').DataTable({
+                responsive: true
+            });
+
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).on('click', '#btn-delete', function(e) {
+            e.preventDefault();
+            var form = $(this).closest("form");
+            Swal.fire({
+                title: 'Apa kamu yakin?',
+                text: "Anda tidak akan dapat mengembalikan ini!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#7367f0',
+                cancelButtonColor: '#82868b',
+                confirmButtonText: 'Ya, hapus!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            })
+        });
+    </script>
+
 </body>
 
 </html>

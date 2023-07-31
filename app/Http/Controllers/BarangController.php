@@ -12,7 +12,11 @@ class BarangController extends Controller
      */
     public function index()
     {
-        return view('barang.barang');
+        $barang = Barang::orderBy('name', 'asc')->get();
+
+        return view('barang.barang', [
+            'barang' => $barang
+        ]);
     }
 
     /**
