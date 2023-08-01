@@ -316,13 +316,13 @@
             e.preventDefault();
             var form = $(this).closest("form");
             Swal.fire({
-                title: 'Apa kamu yakin?',
-                text: "Anda tidak akan dapat mengembalikan ini!",
+                title: 'Are you sure?',
+                text: "You will not be able to revert this!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#7367f0',
                 cancelButtonColor: '#82868b',
-                confirmButtonText: 'Ya, hapus!'
+                confirmButtonText: 'Yes, delete!'
             }).then((result) => {
                 if (result.isConfirmed) {
                     form.submit();
